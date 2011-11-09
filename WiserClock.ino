@@ -8,20 +8,23 @@
 #include "SDuFAT.h"
 #include "Sound.h"
 #include "Buttons.h"
+#include "ClockController.h"
+#include "SimpleFace.h"
 
+ClockController controller;
+SimpleFace simple;
 
 void setup() {
 	setupSpeaker();
 	setupButtons();
 	beep();
 	ht1632_setup();
+
+    controller.setup();
+    controller.currentFace = &simple;
 }
 
-
-
+//Font 0 is awesome
 void loop() {
-  for(int i = 0; i <= 9; ++i) {
-    ht1632_putBigDigit(1,1, i, 0, GREEN, 14);
-    delay(200);
-  }
+  controller.tick();
 }
