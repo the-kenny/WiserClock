@@ -2,6 +2,8 @@
 
 void ClockController::setup() {
   //rtc.start();
+  if(currentFace != NULL)
+    currentFace->init();
   tick();
 }
 

@@ -10,9 +10,11 @@
 #include "Buttons.h"
 #include "ClockController.h"
 #include "SimpleFace.h"
+#include "PongFace.h"
 
 ClockController controller;
 SimpleFace simple;
+PongFace pong;
 
 void setup() {
 	setupSpeaker();
@@ -21,7 +23,8 @@ void setup() {
 	ht1632_setup();
 
     controller.setup();
-    controller.currentFace = &simple;
+    controller.currentFace = &pong;
+//  controller.currentFace = &simple;
 }
 
 //Font 0 is awesome

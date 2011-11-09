@@ -16,6 +16,7 @@ struct ClockFace {
     day = d; month = m; year = y;
   }
 
+  virtual void init() {}
   virtual void updateDisplay() = 0;
 };
 
