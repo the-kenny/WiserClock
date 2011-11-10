@@ -4,21 +4,9 @@
  Released into the public domain.
  */
 
-//*********************************************************************************************************
-//*	Edit History, started June, 2011
-//*	please put your initials and comments here anytime you make changes
-//*********************************************************************************************************
-//*	Jun  20,	2011	?? start() now preserves the seconds;
-//*	Jun  20,	2011	?? saveDateOnly() and SaveTimeOnly() added;
-//*
-//*********************************************************************************************************
-
-
 #include "DS3231.h"
 
-//Hack: See main sketch file
 #include <../Wire/Wire.h>
-
 
 
 DS3231::DS3231()

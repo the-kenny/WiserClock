@@ -1,16 +1,16 @@
 /*
-   DS3231.h - library for DS3231 rtc
-   Copied and adapted the code by matt.joyce@gmail.com, December, 2007.
-   Released into the public domain.
- */
+  DS3231.h - library for DS3231 rtc
+  Copied and adapted the code by matt.joyce@gmail.com, December, 2007.
+  Released into the public domain.
+*/
 
- // ensure this library description is only included once
- #ifndef _DS3231_H_
- #define _DS3231_H_
+// ensure this library description is only included once
+#ifndef _DS3231_H_
+#define _DS3231_H_
 
 
- // include types & constants of Wiring core API
- #include <Arduino.h>
+// include types & constants of Wiring core API
+#include <Arduino.h>
 
 #define DS3231_SEC	0
 #define DS3231_MIN	1
@@ -33,51 +33,50 @@
 #define DS3231_TEMP_LSB	0x12
 
 
- #define DS3231_BASE_YR 2000
+#define DS3231_BASE_YR 2000
 
- #define DS3231_CTRL_ID B1101000
-
-
-  // Define register bit masks
- #define DS3231_CLOCKHALT B10000000
-
- #define DS3231_LO_BCD  B00001111
- #define DS3231_HI_BCD  B11110000
-
- #define DS3231_HI_SEC  B01110000
- #define DS3231_HI_MIN  B01110000
- #define DS3231_HI_HR   B00110000
- #define DS3231_LO_DOW  B00000111
- #define DS3231_HI_DATE B00110000
- #define DS3231_HI_MTH  B00110000
- #define DS3231_HI_YR   B11110000
-
- #define DS3231_DATASTART 0x08
+#define DS3231_CTRL_ID B1101000
 
 
- class DS3231
- {
-   public:
-     DS3231();
-     void get(int *, boolean);
-     int get(int, boolean);
-     int min_of_day(boolean);
-     void set(int, int);
-     void start(void);
-     void stop(void);
-     float getTemperature();
-	 void saveDateOnly(void);
-	 void saveTimeOnly(void);
-      byte enableSQW();
+// Define register bit masks
+#define DS3231_CLOCKHALT B10000000
 
-   private:
-     byte rtc_bcd[0x13]; // used prior to read/set ds3231 registers;
-     void read_rtc(void);
-     void save_rtc(void);
- };
+#define DS3231_LO_BCD  B00001111
+#define DS3231_HI_BCD  B11110000
+
+#define DS3231_HI_SEC  B01110000
+#define DS3231_HI_MIN  B01110000
+#define DS3231_HI_HR   B00110000
+#define DS3231_LO_DOW  B00000111
+#define DS3231_HI_DATE B00110000
+#define DS3231_HI_MTH  B00110000
+#define DS3231_HI_YR   B11110000
+
+#define DS3231_DATASTART 0x08
 
 
- extern DS3231 RTC;
+class DS3231 {
+public:
+  DS3231();
+  void get(int *, boolean);
+  int get(int, boolean);
+  int min_of_day(boolean);
+  void set(int, int);
+  void start(void);
+  void stop(void);
+  float getTemperature();
+  void saveDateOnly(void);
+  void saveTimeOnly(void);
+  byte enableSQW();
 
- #endif // _DS3231_H_
+private:
+  byte rtc_bcd[0x13]; // used prior to read/set ds3231 registers;
+  void read_rtc(void);
+  void save_rtc(void);
+};
+
+
+extern DS3231 RTC;
+
+#endif // _DS3231_H_
 
