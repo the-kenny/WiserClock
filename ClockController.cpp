@@ -9,19 +9,21 @@ void ClockController::setup() {
 }
 
 void ClockController::tick() {
+  int	time[7];
+
+  rtc.get(time, true);
+
+  seconds  = time[0];
+  minutes  = time[1];
+  hours    = time[2];
+  //int dow     = time[3];
+  day     = time[4];
+  month   = time[5];
+  year    = time[6];
+
+  temperature = rtc.getTemperature();
+
   if(currentFace != NULL) {
-    int	time[7];
-
-	rtc.get(time, true);
-
-    seconds  = time[0];
-    minutes  = time[1];
-    hours    = time[2];
-    //int dow     = time[3];
-    day     = time[4];
-    month   = time[5];
-    year    = time[6];
-
     if(seconds != currentFace->seconds ||
        minutes != currentFace->minutes ||
        hours   != currentFace->hours)
@@ -31,6 +33,9 @@ void ClockController::tick() {
        month != currentFace->month ||
        year  != currentFace->year)
       currentFace->setDate(day, month, year);
+
+    if(temperature != currentFace->temperature)
+      currentFace->setTemperature(temperature);
 
     currentFace->lastUpdate = millis();
     currentFace->updateDisplay();

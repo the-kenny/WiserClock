@@ -4,6 +4,7 @@
 struct ClockController {
   DS3231 rtc;
   int hours,minutes,seconds,day,month,year;
+  float temperature;
 
   ClockFace* currentFace;
 

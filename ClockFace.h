@@ -4,7 +4,7 @@
 struct ClockFace {
   int hours, minutes, seconds;
   int day, month, year;
-  int temperature;
+  float temperature;
 
   long lastUpdate;
 
@@ -14,6 +14,10 @@ struct ClockFace {
 
   virtual void setDate(int d, int m, int y) {
     day = d; month = m; year = y;
+  }
+
+  virtual void setTemperature(float t) {
+    temperature = t;
   }
 
   virtual void init() {}
