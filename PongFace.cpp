@@ -68,6 +68,8 @@ void PongFace::updateDisplay()
       ht1632_putSmallChar( 5, -1, buffer[0], RED);
       ht1632_putSmallChar(10, -1, buffer[1], RED);
 
+      for(int i = 0; i < Y_MAX; i+=2)
+        ht1632_plot(16, i, GREEN);
 
       itoa(minutes,buffer,10);
       if (minutes < 10) {
