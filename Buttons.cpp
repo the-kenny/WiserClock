@@ -13,7 +13,7 @@ volatile unsigned long timeBtnMenu	=	0;
 volatile unsigned long timeBtnSet 	=	0;
 volatile unsigned long timeBtnPlus	=	0;
 
-
+void (*buttonCallback)(ButtonType) = NULL;
 
 //*********************************************************************************************************
 void setupButtons()
@@ -34,7 +34,8 @@ void checkButtons()
 	        // debouncing;
 	        if (abs(millis() - timeBtnMenu) < BOUNCE_TIME_BUTTON)  return;
 
-		//wiseClock.processButtonMenu();
+            if(buttonCallback != NULL)
+              buttonCallback(BUTTON_MENU);
 
 	        timeBtnMenu	=	millis();
 	}
@@ -44,7 +45,8 @@ void checkButtons()
 	        // debouncing;
 	        if (abs(millis() - timeBtnSet) < BOUNCE_TIME_BUTTON)  return;
 
-		//wiseClock.processButtonSet();
+            if(buttonCallback != NULL)
+              buttonCallback(BUTTON_SET);
 
 	        timeBtnSet	=	millis();
 	}
@@ -54,7 +56,8 @@ void checkButtons()
 	        // debouncing;
 	        if (abs(millis() - timeBtnPlus) < BOUNCE_TIME_BUTTON)  return;
 
-		//wiseClock.processButtonPlus();
+            if(buttonCallback != NULL)
+              buttonCallback(BUTTON_PLUS);
 
 	        timeBtnPlus	=	millis();
 	}

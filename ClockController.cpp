@@ -44,6 +44,10 @@ void ClockController::tick() {
   checkForBeep();
 }
 
+void ClockController::buttonClicked(ButtonType button) {
+
+}
+
 void ClockController::checkForBeep() {
   if(!beepEnabled) return;
 

@@ -16,13 +16,16 @@
 //------------------------------------------------------------------
 #define BUTTON_PLUS_PIN	2	// "Plus" button on D3 (PB3);
 
-
+enum ButtonType {
+  BUTTON_MENU, BUTTON_SET, BUTTON_PLUS
+};
 
 // last time the respective button was pressed; used for debouncing;
 extern volatile unsigned long timeBtnMenu;
 extern volatile unsigned long timeBtnSet;
 extern volatile unsigned long timeBtnPlus;
 
+extern void (*buttonCallback)(ButtonType);
 
 void setupButtons();
 void checkButtons();

@@ -1,5 +1,6 @@
 #include "DS3231.h"
 #include "ClockFace.h"
+#include "Buttons.h"
 
 struct ClockController {
   DS3231 rtc;
@@ -8,10 +9,12 @@ struct ClockController {
 
   ClockFace* currentFace;
 
+  bool beepEnabled;
+
   void setup();
   void tick();
 
-  bool beepEnabled;
+  void buttonClicked(ButtonType button);
 
 private:
   void checkForBeep();

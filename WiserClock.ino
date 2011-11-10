@@ -14,6 +14,10 @@ ClockController controller;
 SimpleFace simple;
 PongFace pong;
 
+void buttonClicked(ButtonType button) {
+  controller.buttonClicked(button);
+}
+
 void setup() {
 	setupSpeaker();
 	setupButtons();
@@ -23,6 +27,10 @@ void setup() {
     randomSeed(analogRead(A0));
 
     controller.setup();
+
+    //Connect button callbacks
+    buttonCallback = &buttonClicked;
+
     controller.currentFace = &pong;
     controller.beepEnabled = true;
 //  controller.currentFace = &simple;

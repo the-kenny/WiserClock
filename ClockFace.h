@@ -20,6 +20,11 @@ struct ClockFace {
     temperature = t;
   }
 
+  //Button handling
+  virtual void menuPressed() {}
+  virtual void setPressed() {}
+  virtual void plusPressed() {}
+
   virtual void init() {}
   virtual void updateDisplay() = 0;
 };
