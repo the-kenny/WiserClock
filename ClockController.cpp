@@ -1,10 +1,14 @@
 #include "ClockController.h"
 #include "Sound.h"
+#include "Settings.h"
 
 void ClockController::setup() {
   //rtc.start();
   if(currentFace != NULL)
     currentFace->init();
+
+  beepEnabled = EEPROM.read(SETTINGS_BEEP_ENABLED);
+
   tick();
 }
 

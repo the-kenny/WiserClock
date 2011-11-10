@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <stdio.h>
 #include <Wire.h>
+#include <EEPROM.h>
 #include "DS3231.h"
 #include "HT1632.h"
 #include "SDuFAT.h"
@@ -30,13 +31,9 @@ void setup() {
 
     //Connect button callbacks
     buttonCallback = &buttonClicked;
-
     controller.currentFace = &pong;
-    controller.beepEnabled = true;
-//  controller.currentFace = &simple;
 }
 
-//Font 0 is awesome
 void loop() {
   controller.tick();
 }
