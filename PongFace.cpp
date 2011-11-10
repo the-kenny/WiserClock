@@ -365,18 +365,16 @@ void PongFace::updateDisplay()
     //take a snapshot of all the led states
     snapshot_shadowram();
 
-    //if the led at the ball pos is on already, dont bother printing the ball.
-    if (get_shadowram(plot_x, plot_y)){
-      //erase old point, but don't update the erase positions, so next loop the same point will be erased rather than this point which shuldn't be
-      plot (erase_x, erase_y, 0);
-    } else {
-      //else plot the ball and erase the old position
-      plot (plot_x, plot_y, 1);
-      plot (erase_x, erase_y, 0);
-      //reset erase to new pos
-      erase_x = plot_x;
-      erase_y = plot_y;
-    }
+    //set prev. pixel back to old color
+    plot(erase_x, erase_y, oldBallColor);
+    //Get current color of the pixel the ball will be drawn to
+    oldBallColor = get_shadowram(plot_x, plot_y);
+    //Draw the ball
+    plot(plot_x, plot_y, ORANGE);
+
+    //reset erase to new pos
+    erase_x = plot_x;
+    erase_y = plot_y;
 
     //check if a bat missed the ball. if it did, reset the game.
     if ((int)ballpos_x == 0 ||(int) ballpos_x == 47){

@@ -12,6 +12,7 @@ private:
   float ballpos_x, ballpos_y;
   byte erase_x;  //holds ball old pos so we can erase it, set to blank area of screen initially.
   byte erase_y;
+  byte oldBallColor; //Holds previous color of the field where the ball was drawn
   float ballvel_x, ballvel_y;
   int bat1_y;  //bat starting y positions
   int bat2_y;
