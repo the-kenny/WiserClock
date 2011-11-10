@@ -15,64 +15,53 @@ volatile unsigned long timeBtnPlus	=	0;
 
 void (*buttonCallback)(ButtonType) = NULL;
 
-//*********************************************************************************************************
-void setupButtons()
-{
-	pinMode(BUTTON_MENU_PIN,	INPUT);
-	pinMode(BUTTON_SET_PIN,		INPUT);
-	pinMode(BUTTON_PLUS_PIN,	INPUT);
+void setupButtons() {
+  pinMode(BUTTON_MENU_PIN,	INPUT);
+  pinMode(BUTTON_SET_PIN,		INPUT);
+  pinMode(BUTTON_PLUS_PIN,	INPUT);
 }
 
+void checkButtons() {
+  // check buttons;
+  if (digitalRead(BUTTON_MENU_PIN) == LOW) {
+    // debouncing;
+    if (abs(millis() - timeBtnMenu) < BOUNCE_TIME_BUTTON)  return;
 
+    if(buttonCallback != NULL)
+      buttonCallback(BUTTON_MENU);
 
-//*********************************************************************************************************
-void checkButtons()
-{
-	// check buttons;
-	if (digitalRead(BUTTON_MENU_PIN) == LOW)
-	{
-	        // debouncing;
-	        if (abs(millis() - timeBtnMenu) < BOUNCE_TIME_BUTTON)  return;
+    timeBtnMenu	=	millis();
+  }
 
-            if(buttonCallback != NULL)
-              buttonCallback(BUTTON_MENU);
+  if (digitalRead(BUTTON_SET_PIN) == LOW) {
+    // debouncing;
+    if (abs(millis() - timeBtnSet) < BOUNCE_TIME_BUTTON)  return;
 
-	        timeBtnMenu	=	millis();
-	}
+    if(buttonCallback != NULL)
+      buttonCallback(BUTTON_SET);
 
-	if (digitalRead(BUTTON_SET_PIN) == LOW)
-	{
-	        // debouncing;
-	        if (abs(millis() - timeBtnSet) < BOUNCE_TIME_BUTTON)  return;
+    timeBtnSet	=	millis();
+  }
 
-            if(buttonCallback != NULL)
-              buttonCallback(BUTTON_SET);
+  if (digitalRead(BUTTON_PLUS_PIN) == LOW) {
+    // debouncing;
+    if (abs(millis() - timeBtnPlus) < BOUNCE_TIME_BUTTON)  return;
 
-	        timeBtnSet	=	millis();
-	}
+    if(buttonCallback != NULL)
+      buttonCallback(BUTTON_PLUS);
 
-	if (digitalRead(BUTTON_PLUS_PIN) == LOW)
-	{
-	        // debouncing;
-	        if (abs(millis() - timeBtnPlus) < BOUNCE_TIME_BUTTON)  return;
-
-            if(buttonCallback != NULL)
-              buttonCallback(BUTTON_PLUS);
-
-	        timeBtnPlus	=	millis();
-	}
+    timeBtnPlus	=	millis();
+  }
 }
-//*********************************************************************************************************
-boolean readButtons()
-{
-	if ((digitalRead(BUTTON_MENU_PIN) == LOW) || (digitalRead(BUTTON_SET_PIN) == LOW) || (digitalRead(BUTTON_PLUS_PIN) == LOW))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+
+boolean readButtons() {
+  if ((digitalRead(BUTTON_MENU_PIN) == LOW) ||
+      (digitalRead(BUTTON_SET_PIN) == LOW)  ||
+      (digitalRead(BUTTON_PLUS_PIN) == LOW)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 

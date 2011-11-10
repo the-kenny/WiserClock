@@ -1,11 +1,7 @@
-// Buttons.h
-
-#ifndef _BUTTONS_H_
-#define _BUTTONS_H_
-
+#ifndef BUTTONS_H
+#define BUTTONS_H
 
 #include <Arduino.h>
-
 
 #define BUTTON_MENU_PIN	0	// "Menu" button on D0 (PB0);
 #define BUTTON_SET_PIN	1	// "Set"  button on D1 (PB1);
@@ -33,6 +29,4 @@ boolean readButtons();
 
 
 
-#endif  // _BUTTONS_H_
-
-
+#endif
