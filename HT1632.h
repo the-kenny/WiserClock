@@ -1,29 +1,3 @@
-/*
- *********************************************************************************************************
- * HT1632.h - defintions for Holtek HT1632 LED driver.
- *
- * Apr/10 by FlorinC (http://timewitharduino.blogspot.com/)
- *   Copyrighted and distributed under the terms of the Berkeley license
- *   (copy freely, but include this notice of original authors.)
- *
- * Adapted after HT1632 library by Bill Westfield ("WestfW") (http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1225239439/0);
- *
- *********************************************************************************************************
- */
-
-//*********************************************************************************************************
-//*	Edit History, started April, 2010
-//*	please put your initials and comments here anytime you make changes
-//*********************************************************************************************************
-//* Apr 15/10 (fc) created file, by restructuring Wise4Sure.pde;
-//* Oct 10/10 (rp) adapted ht1632_putBigDigit() for multiple fonts;
-//* Jan 29/11 (fc) modified for Wise Clock 3 (3216 bicolor display);
-//* Jun 20/11 (rp) added color and columns parameter to putBigDigit(); 
-//* Jun 20/11 (fc) added setBrightness(), ht1632_plot() now uses int instead of byte; 
-//*
-//*********************************************************************************************************
-
-
 #ifndef _HT1632_
 #define _HT1632_
 

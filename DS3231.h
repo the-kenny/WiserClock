@@ -1,10 +1,3 @@
-/*
-  DS3231.h - library for DS3231 rtc
-  Copied and adapted the code by matt.joyce@gmail.com, December, 2007.
-  Released into the public domain.
-*/
-
-// ensure this library description is only included once
 #ifndef _DS3231_H_
 #define _DS3231_H_
 

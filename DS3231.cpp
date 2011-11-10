@@ -1,9 +1,3 @@
-/*
- DS3231.cpp - library for DS3231 rtc
- Code copied and adapted from matt.joyce@gmail.com, December, 2007.
- Released into the public domain.
- */
-
 #include "DS3231.h"
 
 #include <../Wire/Wire.h>

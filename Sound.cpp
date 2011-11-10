@@ -1,14 +1,3 @@
-// Sound.cpp
-
-//*********************************************************************************************************
-//*	Edit History, started April, 2011
-//*	please put your initials and comments here anytime you make changes
-//*********************************************************************************************************
-//* Apr  12/11 (rp) Added "Are You Sleeping" song
-//* May  29/11 (rp) Added chime();
-//*********************************************************************************************************
-
-
 #include <Arduino.h>
 #include "Sound.h"
 #include "Buttons.h"

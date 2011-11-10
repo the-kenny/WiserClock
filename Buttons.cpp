@@ -1,6 +1,3 @@
-// Buttons.cpp
-
-
 #include "Buttons.h"
 
 // button debouncing adapted from http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1210559123/7;

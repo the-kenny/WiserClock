@@ -1,8 +1,6 @@
 #ifndef PONG_FACE_H
 #define PONG_FACE_H
 
-//Adapted from original WiseClock3 firmware
-
 #include <Arduino.h>
 #include "ClockFace.h"
 

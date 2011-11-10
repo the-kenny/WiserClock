@@ -1,13 +1,3 @@
-/***********************************************************************
- * fontTiny.h - 8x8 fonts defined for ascii characters with codes > 32;
- *         - used in Wise Clock 3;
- * Copyright by FlorinC;
- *   Copyrighted and distributed under the terms of the Berkeley license
- *   (copy freely, but include this notice of original author.)
- ***********************************************************************
- */
-
-
 // define all ascii characters starting with 32 (blank);
 unsigned char PROGMEM tinyFont[95][8] = {
   {
@@ -450,13 +440,13 @@ unsigned char PROGMEM tinyFont[95][8] = {
   },
   {
     0x00,    // ________   M
-    0x22,    // __X___X_ 
-    0x36,    // __XX_XX_ 
-    0x2A,    // __X_X_X_ 
-    0x22,    // __X___X_ 
-    0x22,    // __X___X_ 
-    0x22,    // __X___X_ 
-    0x00     // ________ 
+    0x22,    // __X___X_
+    0x36,    // __XX_XX_
+    0x2A,    // __X_X_X_
+    0x22,    // __X___X_
+    0x22,    // __X___X_
+    0x22,    // __X___X_
+    0x00     // ________
   },
   {
     0x00,    // ________  N

@@ -1,34 +1,3 @@
-/*
- *********************************************************************************************************
- * HT1632.cpp
- *
- * Apr/10 by FlorinC (http://timewitharduino.blogspot.com/)
- *   Copyrighted and distributed under the terms of the Berkeley license
- *   (copy freely, but include this notice of original authors.)
- *
- * Adapted after HT1632 library by Bill Westfield ("WestfW") (http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1225239439/0);
- *
- * Other contributors:
- *   - fWrite (fast writes) functions courtesy of BroHogan (http://brohogan.blogspot.com/);
- *   - Mark Sproul <MLS> msproul _at_ jove.rutgers.edu
- *
- *********************************************************************************************************
- */
-
-//*********************************************************************************************************
-//*	Edit History, started April, 2010
-//*	please put your initials and comments here anytime you make changes
-//*********************************************************************************************************
-//* Apr 15/10 (fc) created file, by restructuring Wise4Sure.pde;
-//* Oct 10/10 (rp) ht1632_putBigDigit() amended to allow for multiple fonts
-//* Jan 29/11 (fc) adapted to 3216 bi-color display;
-//* Jun 12/11 (rp) ht1632_putchar(), ht1632_putSmallChar() amended for ascii character 127 (degree symbol)
-//*	Jun 12/11 (rp) ht1632_putBigDigit() now has color and columns parameter;
-//* Jun 20/11 (fc) added ht1632_putBitmap(), ht1632_putTinyChar(), setBrightness();
-//*
-//*********************************************************************************************************
-
-
 #include "HT1632.h"
 #include <avr/pgmspace.h>	// fonts are now loaded in program space;
 #include "font3.h"
@@ -168,7 +137,7 @@ void ht1632_setup()
     ht1632_sendcmd(j, HT1632_CMD_SYSON); 	/* System on */
     ht1632_sendcmd(j, HT1632_CMD_LEDON); 	/* LEDs on */
   }
- 
+
   ht1632_clear();
   delay(100);
 }
@@ -185,10 +154,10 @@ void ht1632_plot (int x, int y, byte color)
 {
   if (x<0 || x>=X_MAX || y<0 || y>=Y_MAX)
     return;
-  
+
   if (color != BLACK && color != GREEN && color != RED && color != ORANGE)
     return;
-  
+
   byte existingPixel = get_shadowram(x, y);
   if (existingPixel == color)
     return;		// nothing to change;
@@ -301,7 +270,7 @@ byte get_snapshotram(byte x, byte y)
    y = y % 8;
    byte addr = (x<<1) + (y>>2);
    byte bitval = 8>>(y&3);  // compute the required bit;
-   
+
    byte greenByte = ht1632_shadowram[addr]   [nQuarter] >> 4;
    byte redByte   = ht1632_shadowram[addr+32][nQuarter] >> 4;
 
@@ -329,7 +298,7 @@ void ht1632_writebits (byte bits, byte firstbit)
 		if (bits & firstbit)
 		{
 			fWriteA(HT1632_DATA, HIGH);	// digitalWrite(HT1632_DATA, HIGH);
-		} 
+		}
 		else
 		{
 			fWriteA(HT1632_DATA, LOW);	// digitalWrite(HT1632_DATA, LOW);
@@ -410,7 +379,7 @@ void ht1632_putchar(int x, int y, char c, byte color)
 		{
 			if (rowDots & (1<<(5-col)))
 				ht1632_plot(x+col, y+row, color);
-			else 
+			else
 				ht1632_plot(x+col, y+row, BLACK);
 		}
 	}
@@ -447,7 +416,7 @@ void ht1632_putSmallChar(int x, int y, char c, byte color)
 		{
 			if (rowDots & (1<<(5-col)))
 				ht1632_plot(x+col, y+row, color);
-			else 
+			else
 				ht1632_plot(x+col, y+row, BLACK);
 		}
 	}
@@ -509,7 +478,7 @@ void ht1632_putBigDigit(int x, int y, int digit, int fontNbr, byte color, int co
 		{
 			if (rowDots & (1<<((columns - 1) - col)))
 				ht1632_plot(x+col, y+row, color);
-			else 
+			else
 				ht1632_plot(x+col, y+row, BLACK);
 		}
 	}
@@ -546,7 +515,7 @@ void ht1632_putTinyChar(int x, int y, char c, byte color)
 		{
 			if (rowDots & (1<<(3-col)))
 				ht1632_plot(x+col, y+row, color);
-			else 
+			else
 				ht1632_plot(x+col, y+row, BLACK);
 		}
 	}
