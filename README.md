@@ -1,7 +1,7 @@
 # WiserClock
 This is an alternative firmware for the awesome [WiseClock3][] by Florin C.
 
-I'm developing this firmware to provide a cleaner, easier-extendable codebase which enables people to write awesome stuff for it without much fuss. I started this because I found the codebase of the original firmware way too messy and confusing (no offense!).
+I'm developing this firmware to provide a cleaner, easier-extendable codebase which enables people to write awesome stuff for the WiseClock3 without much fuss. I started this because I found the codebase of the original firmware way too messy and confusing (no offense!).
 
 ## License
 Mostly BSD and public domain. Authors:
