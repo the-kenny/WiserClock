@@ -24,6 +24,7 @@ void setup() {
 
     controller.setup();
     controller.currentFace = &pong;
+    controller.beepEnabled = true;
 //  controller.currentFace = &simple;
 }
 
