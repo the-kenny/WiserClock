@@ -47,6 +47,10 @@ void ClockController::tick() {
 void ClockController::checkForBeep() {
   if(!beepEnabled) return;
 
+  //If min > 30, the last lastBeepMinutes should be = 30
+  if(minutes > 30 && lastBeepMinutes == 0)
+    lastBeepMinutes = 30;
+
   if((lastBeepMinutes == 30 && minutes == 0) ||
      (lastBeepMinutes == 0  && minutes == 30)) {
     beep();
