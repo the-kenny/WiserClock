@@ -20,6 +20,8 @@ void setup() {
 	beep();
 	ht1632_setup();
 
+    randomSeed(analogRead(A0));
+
     controller.setup();
     controller.currentFace = &pong;
 //  controller.currentFace = &simple;
