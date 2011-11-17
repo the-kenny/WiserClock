@@ -85,4 +85,22 @@ void ClockController::checkSerial() {
 void ClockController::dispatchSerial(const String& line) {
   if(line == "beep")
     beep();
+  else if(line.startsWith("time ")) {
+    String timeString = line.substring(5);
+    int idx = timeString.indexOf(':');
+    if(idx != -1) {
+      int hours = timeString.substring(0,2).toInt();
+      int mins  = timeString.substring(3,5).toInt();
+      Serial.print("Setting time to: ");
+      Serial.print(hours);
+      Serial.print(':');
+      Serial.println(mins);
+
+      rtc.stop();
+      rtc.set(DS3231_SEC, 0);
+      rtc.set(DS3231_MIN, mins);
+      rtc.set(DS3231_HR, hours);
+      rtc.start();
+    }
+  }
 }
