@@ -10,6 +10,8 @@ void ClockController::setup() {
   beepEnabled = EEPROM.read(SETTINGS_BEEP_ENABLED);
 
   tick();
+
+  Serial.begin(9600);
 }
 
 void ClockController::tick() {
@@ -46,6 +48,7 @@ void ClockController::tick() {
   }
 
   checkForBeep();
+  checkSerial();
 }
 
 void ClockController::buttonClicked(ButtonType button) {
@@ -64,4 +67,22 @@ void ClockController::checkForBeep() {
     beep();
     lastBeepMinutes = minutes;
   }
+}
+
+void ClockController::checkSerial() {
+  byte incoming;
+  while(Serial.available()) {
+    incoming = Serial.read();
+    if(incoming == '\n') {
+      Serial.println("Got line: " + buffer);
+      dispatchSerial(buffer);
+      buffer = "";
+    } else
+      buffer += (char)incoming;
+    }
+}
+
+void ClockController::dispatchSerial(const String& line) {
+  if(line == "beep")
+    beep();
 }

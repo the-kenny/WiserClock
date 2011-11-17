@@ -19,4 +19,8 @@ struct ClockController {
 private:
   void checkForBeep();
   int lastBeepMinutes; //If 30, next beep happens at min=0, if 0, next beep is at min=30
+
+  String buffer;
+  void checkSerial();
+  void dispatchSerial(const String& line);
 };
