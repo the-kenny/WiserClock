@@ -66,6 +66,9 @@ void ClockController::checkForBeep() {
      (lastBeepMinutes == 0  && minutes == 30)) {
     beep();
     lastBeepMinutes = minutes;
+  } else if(lastBeepMinutes == 30 && minutes == 0 && hours == 0) {
+    beep(); delay(50); beep();
+    lastBeepMinutes = minutes;
   }
 }
 
