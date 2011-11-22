@@ -82,13 +82,17 @@ void ClockController::checkSerial() {
       buffer = "";
     } else
       buffer += (char)incoming;
-    }
+  }
 }
 
 void ClockController::dispatchSerial(const String& line) {
   if(line == "beep")
     beep();
-  else if(line.startsWith("time ")) {
+  else if(line.startsWith("hourBeep ")) {
+    bool enabled = (line.substring(10,11).toInt()==1);
+    EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
+    beepEnabled = enabled;
+  } else if(line.startsWith("time ")) {
     String timeString = line.substring(5);
     int idx = timeString.indexOf(':');
     if(idx != -1) {
@@ -105,25 +109,27 @@ void ClockController::dispatchSerial(const String& line) {
       rtc.set(DS3231_HR, hours);
       rtc.start();
     } else if(line.startsWith("date ")) {
-    String dateString = line.substring(5);
-    int idx = timeString.indexOf('/');
-    if(idx != -1) {
-      int day = timeString.substring(0,2).toInt();
-      int month  = timeString.substring(3,5).toInt();
-      int year  = timeString.substring(6,10).toInt();
-      Serial.print("Setting date to: ");
-      Serial.print(day);
-      Serial.print('/');
-      Serial.print(month);
-      Serial.print('/');
-      Serial.println(year);
+      String dateString = line.substring(5);
+      int idx = timeString.indexOf('/');
+      if(idx != -1) {
+        int day = timeString.substring(0,2).toInt();
+        int month  = timeString.substring(3,5).toInt();
+        int year  = timeString.substring(6,10).toInt();
+        Serial.print("Setting date to: ");
+        Serial.print(day);
+        Serial.print('/');
+        Serial.print(month);
+        Serial.print('/');
+        Serial.println(year);
 
-      rtc.stop();
-      rtc.set(DS3231_DATE, day);
-      rtc.set(DS3231_MTH, month);
-      rtc.set(DS3231_YEAR, year);
-      rtc.start();
+        rtc.stop();
+        rtc.set(DS3231_DATE, day);
+        rtc.set(DS3231_MTH, month);
+        rtc.set(DS3231_YR, year);
+        rtc.start();
+      } else {
+        Serial.println("Sorry. I can't let you do that, Dave.");
+      }
     }
-
   }
 }
