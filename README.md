@@ -3,6 +3,18 @@ This is an alternative firmware for the awesome [WiseClock3][] by Florin C.
 
 I'm developing this firmware to provide a cleaner, easier-extendable codebase which enables people to write awesome stuff for the WiseClock3 without much fuss. I started this because I found the codebase of the original firmware way too messy and confusing (no offense!).
 
+## Configuration
+The Clock has a serial interface. Every command is a single line ended by a newline (\n). The following commands are available:
+
+- beep
+Makes the clock emit a beep. Used to test the serial connection
+- time hh:mm
+Sets a new clock time.
+- date dd/mm/yyyy
+Sets a new date
+- beepEnabled <1 or 0>
+Enables (1) or disables (0) beeping on full- and half-hour.
+
 ## License
 Mostly BSD and public domain. Authors:
 
