@@ -108,28 +108,34 @@ void ClockController::dispatchSerial(const String& line) {
       rtc.set(DS3231_MIN, mins);
       rtc.set(DS3231_HR, hours);
       rtc.start();
-    } else if(line.startsWith("date ")) {
-      String dateString = line.substring(5);
-      int idx = timeString.indexOf('/');
-      if(idx != -1) {
-        int day = timeString.substring(0,2).toInt();
-        int month  = timeString.substring(3,5).toInt();
-        int year  = timeString.substring(6,10).toInt();
-        Serial.print("Setting date to: ");
-        Serial.print(day);
-        Serial.print('/');
-        Serial.print(month);
-        Serial.print('/');
-        Serial.println(year);
-
-        rtc.stop();
-        rtc.set(DS3231_DATE, day);
-        rtc.set(DS3231_MTH, month);
-        rtc.set(DS3231_YR, year);
-        rtc.start();
-      } else {
-        Serial.println("Sorry. I can't let you do that, Dave.");
-      }
+    } else {
+      Serial.println("Couldn't parse time: " + timeString);
     }
+  } else if(line.startsWith("date ")) {
+    String dateString = line.substring(5);
+    int idx = dateString.indexOf('/');
+    if(idx != -1) {
+      int day = dateString.substring(0,2).toInt();
+      int month  = dateString.substring(3,5).toInt();
+      int year  = dateString.substring(6,10).toInt();
+      Serial.print("Setting date to: ");
+      Serial.print(day);
+      Serial.print('/');
+      Serial.print(month);
+      Serial.print('/');
+      Serial.println(year);
+
+      rtc.stop();
+      rtc.set(DS3231_DATE, day);
+      rtc.set(DS3231_MTH, month);
+      rtc.set(DS3231_YR, year);
+      rtc.start();
+    } else {
+      Serial.println("Couldn't parse date: " + dateString);
+    }
+  } else if(line.equalsIgnoreCase("Open the pod bay doors, HAL")){
+    Serial.println("Sorry. I can't let you do that, Dave.");
+  } else {
+    Serial.println("I'm not wise enough to understand: " + line);
   }
 }
