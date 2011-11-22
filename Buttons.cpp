@@ -13,9 +13,9 @@ volatile unsigned long timeBtnPlus	=	0;
 void (*buttonCallback)(ButtonType) = NULL;
 
 void setupButtons() {
-  pinMode(BUTTON_MENU_PIN,	INPUT);
-  pinMode(BUTTON_SET_PIN,		INPUT);
-  pinMode(BUTTON_PLUS_PIN,	INPUT);
+  pinMode(BUTTON_MENU_PIN, INPUT);
+  pinMode(BUTTON_SET_PIN, INPUT);
+  pinMode(BUTTON_PLUS_PIN, INPUT);
 }
 
 void checkButtons() {
