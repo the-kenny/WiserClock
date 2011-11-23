@@ -1,11 +1,10 @@
 #include "ClockController.h"
 #include "Sound.h"
 #include "Settings.h"
+#include "HT1632.h"
 
 void ClockController::setup() {
-  //rtc.start();
-  if(currentFace != NULL)
-    currentFace->init();
+  changeFace(faceManager.currentFace());
 
   beepEnabled = EEPROM.read(SETTINGS_BEEP_ENABLED);
   beepTriggerEnabled = false;
@@ -53,7 +52,15 @@ void ClockController::tick() {
 }
 
 void ClockController::buttonClicked(ButtonType button) {
+  if(button == BUTTON_MENU) {
+    changeFace(faceManager.nextFace());
+  }
+}
 
+void ClockController::changeFace(ClockFace* newFace) {
+  currentFace = newFace;
+  currentFace->init();
+  ht1632_clear();
 }
 
 void ClockController::checkForBeep() {

@@ -8,12 +8,8 @@
 #include "Sound.h"
 #include "Buttons.h"
 #include "ClockController.h"
-#include "SimpleFace.h"
-#include "PongFace.h"
 
 ClockController controller;
-SimpleFace simple;
-PongFace pong;
 
 void buttonClicked(ButtonType button) {
   controller.buttonClicked(button);
@@ -31,9 +27,9 @@ void setup() {
 
     //Connect button callbacks
     buttonCallback = &buttonClicked;
-    controller.currentFace = &pong;
 }
 
 void loop() {
   controller.tick();
+  checkButtons();
 }
