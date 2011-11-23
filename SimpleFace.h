@@ -14,7 +14,7 @@ struct SimpleFace: public ClockFace {
     ht1632_putBigDigit(22, 2, minutes%10, 5, bigColor, 6);
 
     long now = millis();
-    if(now-dotMillis > 2000) {
+    if(now-dotMillis > 800) {
       dotMillis = now;
 
       dotsVisible = !dotsVisible;
