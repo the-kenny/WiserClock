@@ -77,7 +77,7 @@ void ClockController::checkSerial() {
   while(Serial.available()) {
     incoming = Serial.read();
     if(incoming == '\n') {
-      Serial.println("Got line: " + buffer);
+      //Serial.println("Got line: " + buffer);
       dispatchSerial(buffer);
       buffer = "";
     } else
