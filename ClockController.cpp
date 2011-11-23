@@ -8,6 +8,7 @@ void ClockController::setup() {
     currentFace->init();
 
   beepEnabled = EEPROM.read(SETTINGS_BEEP_ENABLED);
+  beepTriggerEnabled = false;
 
   tick();
 
@@ -58,17 +59,16 @@ void ClockController::buttonClicked(ButtonType button) {
 void ClockController::checkForBeep() {
   if(!beepEnabled) return;
 
-  //If min > 30, the last lastBeepMinutes should be = 30
-  if(minutes > 30 && lastBeepMinutes == 0)
-    lastBeepMinutes = 30;
+  if(seconds > 30) {
+    beepTriggerEnabled = true;
+  } else if(beepTriggerEnabled) {
+    if(minutes == 0)
+      soundChimeLong();
+    else if(minutes == 30)
+      soundChimeShort();
 
-  if((lastBeepMinutes == 30 && minutes == 0) ||
-     (lastBeepMinutes == 0  && minutes == 30)) {
-    beep();
-    lastBeepMinutes = minutes;
-  } else if(lastBeepMinutes == 30 && minutes == 0 && hours == 0) {
-    beep(); delay(50); beep();
-    lastBeepMinutes = minutes;
+    if(minutes == 0 || minutes == 30)
+      beepTriggerEnabled = false;
   }
 }
 
