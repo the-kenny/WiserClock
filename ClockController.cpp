@@ -96,7 +96,7 @@ void ClockController::dispatchSerial(const String& line) {
   if(line == "beep")
     beep();
   else if(line.startsWith("hourBeep ")) {
-    bool enabled = (line.substring(10,11).toInt()==1);
+    bool enabled = (line.substring(9,10).toInt()==1);
     EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
     beepEnabled = enabled;
     Serial.print(beepEnabled ? "Enabling" : "Disabling");
