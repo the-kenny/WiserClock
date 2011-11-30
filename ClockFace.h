@@ -1,7 +1,9 @@
 #ifndef CLOCK_FACE_H
 #define CLOCK_FACE_H
 
-struct ClockFace {
+#include "SerialHandler.h"
+
+struct ClockFace: public SerialHandler {
   int hours, minutes, seconds;
   int day, month, year;
   float temperature;
@@ -27,6 +29,9 @@ struct ClockFace {
 
   virtual void init() {}
   virtual void updateDisplay() = 0;
+
+  //Serial Handling
+  virtual bool handleSerialEvent(const String& event) { return false; }
 };
 
 #endif
