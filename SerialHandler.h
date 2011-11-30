@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 class SerialHandler {
+public:
   virtual bool handleSerialEvent(const String& event) = 0;
 };
 
