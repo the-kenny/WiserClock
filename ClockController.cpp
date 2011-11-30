@@ -134,6 +134,13 @@ bool ClockController::handleSerialEvent(const String& line) {
       rtc.set(DS3231_MTH, month);
       rtc.set(DS3231_YR, year);
       rtc.start();
+    } else if(line.startsWith("hourBeep ")) {
+      bool enabled = (line.substring(9,10).toInt()==1);
+      EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
+      beepEnabled = enabled;
+      Serial.print(beepEnabled ? "Enabling" : "Disabling");
+      Serial.println(" beep");
+      handled = true;
     } else {
       Serial.println("Couldn't parse date: " + dateString);
     }
@@ -155,13 +162,6 @@ void ClockController::dispatchSerial(const String& line) {
 
   if(line == "beep") {
     beep();
-    handled = true;
-  } else if(line.startsWith("hourBeep ")) {
-    bool enabled = (line.substring(9,10).toInt()==1);
-    EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
-    beepEnabled = enabled;
-    Serial.print(beepEnabled ? "Enabling" : "Disabling");
-    Serial.println(" beep");
     handled = true;
   } else if(line.equalsIgnoreCase("Open the pod bay doors, HAL")){
     Serial.println("Sorry. I can't let you do that, Dave.");
