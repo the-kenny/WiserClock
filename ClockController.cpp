@@ -92,16 +92,9 @@ void ClockController::checkSerial() {
   }
 }
 
-void ClockController::dispatchSerial(const String& line) {
-  if(line == "beep")
-    beep();
-  else if(line.startsWith("hourBeep ")) {
-    bool enabled = (line.substring(9,10).toInt()==1);
-    EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
-    beepEnabled = enabled;
-    Serial.print(beepEnabled ? "Enabling" : "Disabling");
-    Serial.println(" beep");
-  } else if(line.startsWith("time ")) {
+bool ClockController::handleSerialEvent(const String& line) {
+  bool handled = false;
+  if(line.startsWith("time ")) {
     String timeString = line.substring(5);
     int idx = timeString.indexOf(':');
     if(idx != -1) {
@@ -120,6 +113,8 @@ void ClockController::dispatchSerial(const String& line) {
     } else {
       Serial.println("Couldn't parse time: " + timeString);
     }
+
+    handled = true;
   } else if(line.startsWith("date ")) {
     String dateString = line.substring(5);
     int idx = dateString.indexOf('/');
@@ -142,9 +137,40 @@ void ClockController::dispatchSerial(const String& line) {
     } else {
       Serial.println("Couldn't parse date: " + dateString);
     }
+
+    handled = true;
+  }
+
+  if(!handled) {
+    //Dispatch to child(s)
+    if(currentFace != NULL)
+      handled = currentFace->handleSerialEvent(line);
+  }
+
+  return handled;
+}
+
+void ClockController::dispatchSerial(const String& line) {
+  bool handled = false;
+
+  if(line == "beep") {
+    beep();
+    handled = true;
+  } else if(line.startsWith("hourBeep ")) {
+    bool enabled = (line.substring(9,10).toInt()==1);
+    EEPROM.write(SETTINGS_BEEP_ENABLED, enabled);
+    beepEnabled = enabled;
+    Serial.print(beepEnabled ? "Enabling" : "Disabling");
+    Serial.println(" beep");
+    handled = true;
   } else if(line.equalsIgnoreCase("Open the pod bay doors, HAL")){
     Serial.println("Sorry. I can't let you do that, Dave.");
+    handled = true;
   } else {
-    Serial.println("I'm not wise enough to understand: " + line);
+    //Dispatch
+    handled = this->handleSerialEvent(line);
   }
+
+  if(!handled)
+    Serial.println("I'm not wise enough to understand: " + line);
 }

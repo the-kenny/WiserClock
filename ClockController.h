@@ -2,8 +2,9 @@
 #include "ClockFace.h"
 #include "Buttons.h"
 #include "FaceManager.h"
+#include "SerialHandler.h"
 
-struct ClockController {
+struct ClockController: public SerialHandler {
   DS3231 rtc;
   int hours,minutes,seconds,day,month,year;
   float temperature;
@@ -27,4 +28,6 @@ private:
   String buffer;
   void checkSerial();
   void dispatchSerial(const String& line);
+
+  bool handleSerialEvent(const String& line);
 };
